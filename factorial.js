@@ -52,3 +52,23 @@ function computeFactorial(){
             backToMenu();
         })
 }
+
+function exitProgram(){
+    console.log("---------------");
+    console.log("1. Back to Menu");
+    console.log("2. Exit");
+
+    rl.question("What would you like to do next?(1-2)", (backToMenuChoice)=>{
+        if(backToMenuChoice === "1"){
+            console.clear();
+            mainMenu();
+        } else if (backToMenuChoice === "2"){
+            exitProgram();
+        } else {
+            console.log ("invalid Choice. Please Try Again!");
+            backToMenu();
+        }
+    })
+}
+
+mainMenu();
