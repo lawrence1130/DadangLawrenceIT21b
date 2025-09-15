@@ -19,7 +19,7 @@ function mainMenu(){
         if(choice === "1"){
             sayHello();
         } else if (choice === "2"){
-            computerFactorial();
+            computeFactorial();
         } else if (choice === "3"){
             exitProgram();
         } else {
@@ -28,3 +28,27 @@ function mainMenu(){
     })
 }
 
+function sayHello(){
+    console.log("Hello");
+}
+
+function computeFactorial(){
+    console.log("Factorial");
+
+    rl.question("Please enter a number for factorial: ", numStr =>{
+            let num = parseInt(numStr);
+
+            if (isNaN(num) || num < 0){
+                console.log("Please enter a non-negative integer");
+            } else {
+                let fact = 1;
+
+                for (let i=1; i <= num; i++){
+                    fact *=i;
+                }
+
+                console.log("The factorial of " + num + " is " + fact);
+            }
+            backToMenu();
+        })
+}
