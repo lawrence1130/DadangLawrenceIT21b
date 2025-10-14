@@ -11,6 +11,9 @@
 <body>
     <h1>Line Chart</h1>
     
+    <dibv>
+        <canvas id = "LineChart"></canvas>
+    </dibv>
     // Canvas element for rendering the chart
     <script>
         class LineChart{
@@ -56,8 +59,20 @@
                     console.error("There has been a problem with your fetch operation:", error);
                     return null;
                 }
-        }
+           }
+
+           async init(){
+                const data = await this.fetchData();
+                if(data){
+                    this.renderChart(data);
+                }
+            }
     }
+
+    document.addEventListener("DOMContentLoaded", () => {
+        const chart = new LineChart("lineChart","linedata.json");
+        chart.init();
+    });
     </script>
 </body>
 </html>
