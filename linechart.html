@@ -10,4 +10,64 @@
 </head> 
 <body>
     <h1>Line Chart</h1>
+    <div>
+        <canvas id="myChart"></canvas>
+    </div>
+
+    <script>
+        const ctx = document.getElementById('myChart');
+
+        new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+                datasets: [{
+                    label: 'My First dataset',
+                    borderColor: 'rgb(255, 99, 132)',
+                    data: [0, 10, 5, 2, 20, 30, 45],
+                    borderwidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    </script>
+    <script>
+        class LineChart{
+            constructor(canvasId, data, labels){
+                this.canvasId = canvasId;
+                this.dataUrl = dataUrl;
+                this.chart = null;
+            }
+
+            renderChart(){
+                const ctx = document.getElementById(this.canvasId). getContext("2d");
+
+                this.chart = new Chart(ctx, {
+                    type: 'line',
+                    data: {
+                        labels: this.labels,
+                        datasets: [{
+                            label: 'Monthly Data',
+                            data: this.data,
+                            borderwidth: 1
+                        }]
+                    },
+                    options: {
+                        scales: {
+                            y: {
+                                beginAtZero: true
+                            }
+                        }
+                    }
+                });
+            }
+        }
+    </script>
+</body>
 </html>
