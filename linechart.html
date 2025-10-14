@@ -10,33 +10,8 @@
 </head> 
 <body>
     <h1>Line Chart</h1>
-    <div>
-        <canvas id="myChart"></canvas>
-    </div>
-
-    <script>
-        const ctx = document.getElementById('myChart');
-
-        new Chart(ctx, {
-            type: 'line',
-            data: {
-                labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
-                datasets: [{
-                    label: 'My First dataset',
-                    borderColor: 'rgb(255, 99, 132)',
-                    data: [0, 10, 5, 2, 20, 30, 45],
-                    borderwidth: 1
-                }]
-            },
-            options: {
-                scales: {
-                    y: {
-                        beginAtZero: true
-                    }
-                }
-            }
-        });
-    </script>
+    
+    // LineChart class
     <script>
         class LineChart{
             constructor(canvasId, data, labels){
@@ -45,6 +20,7 @@
                 this.chart = null;
             }
 
+            // method to fetch data from a URL
             renderChart(){
                 const ctx = document.getElementById(this.canvasId). getContext("2d");
 
@@ -67,7 +43,21 @@
                     }
                 });
             }
+
+            async fetchData(){
+                try{
+                    const response = await fetch(this.dataUrl);
+                    if(!response.ok){
+                        throw new Error(`Failed to fetch data: ${response.statusText}`);
+                    }
+                    const jsonData = await response.json();
+                    return data;
+                } catch(error){
+                    console.error("There has been a problem with your fetch operation:", error);
+                    return null;
+                }
         }
+    }
     </script>
 </body>
 </html>
