@@ -25,7 +25,17 @@
     renderChart(data){
         const ctx = document.getElementById(this.canvasId).getContext("2d");
 
-        
+        this.chart = new Chart(ctx, {
+            type: "radar",
+            data: {
+                labels: data.labels,
+                datasets: [{
+                    label: "Radar Data",
+                    data: data.values,
+                    borderWidth: 1
+                }]
+            },
+        })
     }
 </script>
 
