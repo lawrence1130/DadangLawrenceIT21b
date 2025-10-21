@@ -73,6 +73,10 @@
         }
     }
 
+    document.addEventListener("DOMContentLoaded", () => {
+        const chart = new radarChart("radarChart", "radardata.json");
+        chart.init();
+    });
 </script>
 
 </script>
