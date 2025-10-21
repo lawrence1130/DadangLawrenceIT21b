@@ -13,6 +13,7 @@
         <canvas id="radarChart"></canvas>
     </div>
 </body>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
     class radarChart {
         constructor(canvasId, dataUrl) {
@@ -20,37 +21,36 @@
             this.dataUrl = dataUrl;
             this.chart = null;
         }
-    }
+        renderChart(data) {
+            const ctx = document.getElementById(this.canvasId).getContext("2d");
 
-    renderChart(data){
-        const ctx = document.getElementById(this.canvasId).getContext("2d");
-
-        this.chart = new Chart(ctx, {
-            type: "radar",
-            data;{
-                label:data.labels,
-                datasets:data.datasets
-            },
-            option:{
-                responsive: true,
-                plugins:{
-                    legend:{
-                        position: "top"
-                    },
-                    title: {
-                        display:true,
-                        text:"Radar Chart"
-                    },
-                    scales:{
-                        r:{
-                            angleLines:{display: true},
-                            suggestedMin: 0,
-                            suggestedMax: 100
+            this.chart = new Chart(ctx, {
+                type: "radar",
+                data: {
+                    labels: data.labels,
+                    datasets: data.datasets
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            position: "top"
+                        },
+                        title: {
+                            display: true,
+                            text: "Radar Chart"
+                        },
+                        scales: {
+                            r: {
+                                angleLines: { display: true },
+                                suggestedMin: 0,
+                                suggestedMax: 100
+                            }
                         }
                     }
                 }
-            }
-        })
+            });
+        }
     }
 </script>
 
