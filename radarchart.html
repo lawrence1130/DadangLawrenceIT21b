@@ -36,12 +36,18 @@
                 plugins:{
                     legend:{
                         position: "top"
-                    }
-                    title:{
+                    },
+                    title: {
                         display:true,
                         text:"Radar Chart"
                     },
-                    
+                    scales:{
+                        r:{
+                            angleLines:{display: true},
+                            suggestedMin: 0,
+                            suggestedMax: 100
+                        }
+                    }
                 }
             }
         })
