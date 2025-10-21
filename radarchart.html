@@ -4,47 +4,50 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Radar Chart</title>
-    <link rel="stylesheet" href="styles.css">
-    <script src="radarchart.js" defer></script>
 </head>
 <body>
+    <h1>Radar Chart</h1>
     <div>
         <canvas id="radarChart"></canvas>
     </div>
 </body>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
-    class radarChart {
-        constructor(canvasId, dataUrl) {
+    class radarChart{
+        constructor(canvasId,dataUrl){
             this.canvasId = canvasId;
             this.dataUrl = dataUrl;
             this.chart = null;
         }
-        renderChart(data) {
+
+        renderChart(data){
             const ctx = document.getElementById(this.canvasId).getContext("2d");
 
-            this.chart = new Chart(ctx, {
-                type: "radar",
-                data: {
-                    labels: data.labels,
+            this.chart = new Chart(ctx,{
+                type:"radar",
+                data:{
+                    //Labels
+                    labels:data.labels,
+                    //Datasets
                     datasets: data.datasets
                 },
-                options: {
+                options:{
                     responsive: true,
-                    plugins: {
-                        legend: {
-                            position: "top"
+                    plugins:{
+                        legend:{
+                           position:"top"
                         },
-                        title: {
+                        title:{
                             display: true,
-                            text: "Radar Chart"
-                        },
-                        scales: {
-                            r: {
-                                angleLines: { display: true },
-                                suggestedMin: 0,
-                                suggestedMax: 100
-                            }
+                            //Title
+                            text:"Radar Chart"
+                        }
+                    },
+                    scales:{
+                        r:{
+                            angleLines:{display:true},
+                            suggestedMin:0,
+                            suggestedMax:100
                         }
                     }
                 }
@@ -54,30 +57,25 @@
         async fetchData(){
             try{
                 const response = await fetch(this.dataUrl);
-                if(!response.ok){
-                    throw new Error(`Failed to fetch data: ${response.statusText}`);
-                }
-                const jsonData = await response.json();
-                return jsonData;
+                if(!response.ok) throw new Error(`Failed to load data: ${response.statusText}`);
+
+                const data = await response.json();
+                return data;
             } catch(error){
-                console.error("Error fetching data:", error);
+                console.error("Error fetching data: ", error);
                 return null;
             }
         }
 
         async init(){
             const data = await this.fetchData();
-            if(data){
-                this.renderChart(data);
-            }
+            if(data) this.renderChart(data);
         }
     }
 
-    document.addEventListener("DOMContentLoaded", () => {
-        const chart = new radarChart("radarChart", "radardata.json");
+    document.addEventListener("DOMContentLoaded", ()=>{
+        const chart = new radarChart("radarChart","radarChart.json");
         chart.init();
     });
-</script>
-<!--fix later-->
 </script>
 </html>
