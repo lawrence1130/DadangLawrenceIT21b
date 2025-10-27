@@ -1,23 +1,29 @@
 {
-    "labels": ["Communication","Teamwork","Problem Solving","Creativity","Adaptability","Leadership"],
+    "labels": ["1","2","3","4","5","6", "7", "8"],
     "datasets":[
         {
             "label":"Person A",
-            "data":[30, 90, 27, 90, 27, 90],
+            "data":[35, 90, 75, 60, 70, 60 , 75, 90],
             "backgroundColor":"rgba(75,192,192,0.2)",
             "bordercolor":"rgba(75,192,192,1)"
         },
         {
             "label":"Person B",
-            "data":[70, 70, 70, 70, 70, 70],
+            "data":[90, 90, 90, 90, 90, 90 , 90, 90],
             "backgroundColor":"rgba(255,99,132,0.2)",
             "bordercolor":"rgba(255,99,132,1)"
         },
         {
             "label":"Person C",
-            "data":[90, 27, 90, 30, 90, 27],
+            "data":[80, 80, 80, 80, 80, 80 , 80, 80],
             "backgroundColor":"rgba(54,162,235,0.2)",
             "bordercolor":"rgba(54,162,235,1)"
+        },
+        {
+            "label":"Person D",
+            "data":[70, 70, 70, 70, 70, 70 , 70, 70],
+            "backgroundColor":"rgba(255,206,86,0.2)",
+            "bordercolor":"rgba(255,206,86,1)"
         }
     ]
 }
