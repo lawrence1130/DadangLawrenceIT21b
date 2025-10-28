@@ -3,77 +3,76 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Line Chart</title>
-    <link rel="stylesheet" href="styles.css">
-    <script src="https://cdn.jsdelivr.net/npm/chart.js" defer></script>
-    <script src="linechart.js" defer></script>
-</head> 
+    <title>Linechart</title>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
 <body>
     <h1>Line Chart</h1>
-    
-    <dibv>
-        <canvas id = "LineChart"></canvas>
-    </dibv>
+    <div>
+        <canvas id="linechart"></canvas>
+    </div>
+
 </body>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
-    <script>
-        class LineChart{
-            constructor(canvasId, data, labels){
-                this.canvasId = canvasId;
-                this.dataUrl = dataUrl;
-                this.chart = null;
-            }
-
-            // method to fetch data from a URL
-            renderChart(){
-                const ctx = document.getElementById(this.canvasId). getContext("2d");
-
-                this.chart = new Chart(ctx, {
-                    type: 'line',
-                    data: {
-                        labels: this.labels,
-                        datasets: [{
-                            label: 'Monthly Data',
-                            data: this.data,
-                            borderwidth: 1
-                        }]
-                    },
-                    options: {
-                        scales: {
-                            y: {
-                                beginAtZero: true
-                            }
-                        }
-                    }
-                });
-            }
-
-            async fetchData(){
-                try{
-                    const response = await fetch(this.dataUrl);
-                    if(!response.ok){
-                        throw new Error(`Failed to fetch data: ${response.statusText}`);
-                    }
-                    const jsonData = await response.json();
-                    return data;
-                } catch(error){
-                    console.error("There has been a problem with your fetch operation:", error);
-                    return null;
-                }
-           }
-
-           async init(){
-                const data = await this.fetchData();
-                if(data){
-                    this.renderChart(data);
-                }
-            }
+<script>
+class LineChart{
+    constructor(canvasId,dataUrl){
+        this.canvasId = canvasId;
+        this.dataUrl = dataUrl;
+        this.chart = null;
     }
 
-    document.addEventListener("DOMContentLoaded", () => {
-        const chart = new LineChart("lineChart","linedata.json");
-        chart.init();
-    });
-    </script>
+    renderChart(data){
+        const ctx = document.getElementById(this.canvasId).getContext("2d");
+
+        this.chart = new Chart(ctx,{
+            type:"line",
+            data:{
+                //Labels
+                labels: data.labels,
+                datasets:[{
+                    label:"Monthly Data",
+                    //Data
+                    data:data.values,
+                    borderwidth:1
+                }]
+            },
+            options:{
+                scales:{
+                    y:{
+                        beginAtZero:true
+                    }
+                }
+            }
+        });
+    }
+
+    async fetchData(){
+        try{
+            const response = await fetch(this.dataUrl);
+            
+            if(!response.ok) throw new Error(`Failed to load data: ${response.statusText}`);
+
+            const data = await response.json();
+            return data;
+
+        } catch(error){
+            console.error("Error fetching data:", error);
+            return null;
+        }
+    }
+
+    async init(){
+        const data = await this.fetchData();
+        if(data){
+            this.renderChart(data);
+        }
+    }
+}
+
+document.addEventListener("DOMContentLoaded", ()=>{
+    const chart = new LineChart("linechart","linedata.json");
+    chart.init();
+})
+</script>
 </html>
